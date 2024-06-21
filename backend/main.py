@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 app = FastAPI()
@@ -8,6 +9,13 @@ staticJson = {
   "title": 'Test Title',
   "description": 'Test Description',
 }
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/create")
 def create(json_object: dict):
@@ -21,7 +29,7 @@ def read():
 def update(json_object: dict):
     return json_object
 
-@app.delete("/delete")
+@app.delete("/delete/{id}")
 def delete(id: int):
     return id
 
