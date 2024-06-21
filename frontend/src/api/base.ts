@@ -1,11 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CustomObject } from "../types/CustomObject";
 
+const BASE_URL = "http://localhost:8000";
+
 export function useReadObject() {
   return useQuery({
     queryKey: ["readObject"],
     queryFn: async () => {
-      const response = await fetch("http://localhost:8000/read");
+      const response = await fetch(`${BASE_URL}/read`);
 
       const body = (await response.json()) as CustomObject;
       return body;
@@ -16,8 +18,11 @@ export function useReadObject() {
 export function useCreateObject() {
   return useMutation({
     mutationFn: async (data: CustomObject) => {
-      const response = await fetch("http://localhost:8000/create", {
+      const response = await fetch(`${BASE_URL}/create`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
 
@@ -32,8 +37,11 @@ export function useUpdateObject() {
 
   return useMutation({
     mutationFn: async (data: CustomObject) => {
-      const response = await fetch("http://localhost:8000/update", {
+      const response = await fetch(`${BASE_URL}/update`, {
         method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
       });
 
@@ -51,7 +59,7 @@ export function useDeleteObject() {
 
   return useMutation({
     mutationFn: async (id: number) => {
-      await fetch(`https://lcoalhost:8000/delete/${id}`, {
+      await fetch(`${BASE_URL}/delete/${id}`, {
         method: "DELETE",
       });
     },
