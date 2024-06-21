@@ -29,7 +29,7 @@ export function UserPage() {
   } = useDeleteObject();
 
   return (
-    <div className="p-4 h-screen flex flex-col justify-evenly border border-black">
+    <div className="p-4 h-screen flex flex-col justify-evenly">
       {customObject === undefined || isFetching ? (
         <div className="text-center text-xl text-gray-600">Loading...</div>
       ) : (
@@ -93,7 +93,7 @@ function Button({
     <button
       className={`p-2 rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300 ${
         error && "border border-red-500"
-      } ${isSuccess && "border-2 border-green-500"}`}
+      } ${isSuccess && "border--green-500"}`}
       onClick={onClick}
       disabled={loading}
     >
