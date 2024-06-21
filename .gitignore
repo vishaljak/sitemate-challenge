@@ -4,3 +4,8 @@ node_modules/
 .vscode/*
 .idea
 pnpm-debug.log
+
+backend/venv/
+backend/env/
+backend/*.pyc
+backend/__pycache__
